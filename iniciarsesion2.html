@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="stylesiniciarsesion.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m6 offset-m3">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title center-align">Iniciar Sesión</span>
+            <div class="row">
+              <div class="col s6">
+                <button class="btn waves-effect waves-light user-btn" id="userBtn">Usuario</button>
+              </div>
+              <div class="col s6">
+                <button class="btn waves-effect waves-light editor-btn" id="editorBtn">Editor</button>
+              </div>
+            </div>
+            <div id="userForm" class="row" style="display: none;">
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="username" type="text" required>
+                  <label for="username">Usuario</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="password" type="password" required>
+                  <label for="password">Contraseña</label>
+                </div>
+              </div>
+            </div>
+            <div id="editorForm" class="row" style="display: none;">
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="editorUsername" type="text" required>
+                  <label for="editorUsername">Usuario</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="editorPassword" type="password" required>
+                  <label for="editorPassword">Contraseña</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="editorCode" type="text" required>
+                  <label for="editorCode">Código de editor</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 center-align">
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn">Iniciar Sesión
+                  
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="scriptiniciar.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egresados</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index2.html">🏠 INICIO</a></li>
+                <li><a href="icfes2.html">🎓 ICFES</a></li>
+                <li><a href="orientacion2.html">🧭 Orientación Vocacional</a></li>
+                <li><a href="becas2.html">💰 Becas</a></li>
+                <li><a href="egresados2.html">🎓 Egresados</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="sections">
+            <div class="section">
+                <h2>🎓 Egresados</h2>
+                <p>Descubre las oportunidades y recursos disponibles para los egresados de las instituciones educativas de Colombia:</p>
+                <div class="egresados-grid">
+                    <div class="egresados-card">
+                        <h3>💼 Bolsa de Empleo</h3>
+                        <p>Accede a ofertas laborales exclusivas para egresados y postúlate a las mejores oportunidades.</p>
+                        <a href="https://co.computrabajo.com/" class="btn">🔍 Explorar Ofertas</a>
+                    </div>
+                    <div class="egresados-card">
+                        <h3>📚 Educación Continua</h3>
+                        <p>Mantente actualizado y mejora tus habilidades con programas de educación continua y posgrados.</p>
+                        <a href="https://estudiar.unir.net/co/co-gen-ma-gene-maestrias-virtuales/?utm_source=GOOGLE-BUSQ&utm_medium=Search&utm_campaign=UNIREU_LT_CO_X_X_MO_X_X_NOMAR_X_LWEB_GLOB_CO_AREA-VERT_AO_GOOGLE-BUS_BUS_GEN_X_X&utm_content=CO_CO_X_X_MO_X_X_NOMAR_BUSQ_Master_TXT_CPC_GOOGLE-BUS_MIX_X_X_X&bi_campaignid=12191299093&bi_adgroupid=139912350404&gad_source=1&gclid=CjwKCAjw0aS3BhA3EiwAKaD2ZY8LTZ-QrgoI_vzawk9Ruk71bUHwrXLqMXniCVOLgW367l5BTL9vnxoC9EMQAvD_BwE" class="btn">📖 Ver Programas</a>
+                    </div>
+                    <div class="egresados-card">
+                        <h3>👥 Red de Egresados</h3>
+                        <p>Únete a nuestra comunidad de egresados y mantente conectado con tus compañeros y alma mater.</p>
+                        <a href="basedeegresados2.html" class="btn">🤝 Unirse a la Red</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <table id="graduateTable">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+        <tbody id="graduateTableBody"></tbody>
+    </table>
+
+    <script>
+        // Configuración de Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyACkAcUz7yQqv58umbDuPHoXdU8lZV7u2c",
+      authDomain: "egresadosprom.firebaseapp.com",
+      projectId: "egresadosprom",
+      storageBucket: "egresadosprom.appspot.com",
+      messagingSenderId: "397509776869",
+      appId: "1:397509776869:web:bdae264b486fa8280d4b0c",
+      databaseURL: "https://egresadosprom-default-rtdb.firebaseio.com/"
+            // Tus credenciales de Firebase
+        };
+
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Referencia a la base de datos
+        var database = firebase.database();
+
+        // Función para obtener los datos de los egresados y llenar la tabla
+        function loadGraduateData() {
+            var graduateTableBody = document.getElementById('graduateTableBody');
+
+            // Referencia a la base de datos para obtener los graduados
+            var graduatesRef = database.ref('graduados');
+
+            // Obtener datos de Firebase
+            graduatesRef.once('value', function(snapshot) {
+                graduateTableBody.innerHTML = ''; // Limpiar cualquier contenido previo
+
+                snapshot.forEach(function(childSnapshot) {
+                    var graduate = childSnapshot.val();
+
+                    // Crear una nueva fila en la tabla
+                    var row = document.createElement('tr');
+
+                    // Crear celdas para cada campo
+                    var nameCell = document.createElement('td');
+                    nameCell.textContent = graduate.Nombres;
+
+                    var lastNameCell = document.createElement('td');
+                    lastNameCell.textContent = graduate.Apellidos;
+
+                    var emailCell = document.createElement('td');
+                    emailCell.textContent = graduate.Correo;
+
+                    var phoneCell = document.createElement('td');
+                    phoneCell.textContent = graduate.Telefono;
+
+                    // Agregar las celdas a la fila
+                    row.appendChild(nameCell);
+                    row.appendChild(lastNameCell);
+                    row.appendChild(emailCell);
+                    row.appendChild(phoneCell);
+
+                    // Agregar la fila a la tabla
+                    graduateTableBody.appendChild(row);
+                });
+            });
+        }
+
+        // Llamar a la función para cargar los datos al cargar la página
+        window.onload = loadGraduateData;
+    </script>
+</body>
+</html>
